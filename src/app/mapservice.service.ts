@@ -26,7 +26,7 @@ export class MapserviceService {
   turbines;
   //#endregion
 
-  public mapLoadPromise: Promise<boolean>;
+  public mapLoadPromise = new Promise<boolean>((resolve, reject) => { }); // : Promise<boolean>;
 
   public symbologyObjs: Array<[string, any]> = new Array<[string, any]>();
 
@@ -85,7 +85,7 @@ export class MapserviceService {
     this.wind = new this.ArcGISDynamicMapServiceLayer(this.constants.windPotentialEndpoint,
       { id: 'wind_potential_layer' });
 
-      this.turbines = new this.ArcGISDynamicMapServiceLayer(this.constants.turbineLocEndpont,
+    this.turbines = new this.ArcGISDynamicMapServiceLayer(this.constants.turbineLocEndpont,
       { id: 'turbine_location_layer' });
 
     this.map.addLayers([
