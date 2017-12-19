@@ -1,0 +1,13 @@
+<div id="wrapperDiv" class="dialog">
+  <div class="cntrlButtons">
+      <button type="button" *ngIf="minimized === false" (click)="minimized = true" aria-label="Minimize" class="dialog_btn">-</button>
+      <button type="button" *ngIf="minimized === true" (click)="minimized = false" aria-label="Minimize" class="dialog_btn">+</button>
+      <!-- <button type="button" (click)="close()" aria-label="Close" class="dialog_btn">X</button> -->
+  </div>
+  <div class="title_div" class="title_div" (mousedown)="mouseDown($event)">
+      <label>
+          {{title}}
+      </label>
+  </div>
+  <ng-content *ngIf="minimized === false"></ng-content>
+</div>

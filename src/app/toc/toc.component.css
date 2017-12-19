@@ -1,0 +1,44 @@
+#tocDiv {
+    position: absolute;
+    /* top: 42px; */
+    top: 35px;
+    left: 0px;
+    background-color: lightsteelblue;
+    opacity: .7;
+    /* margin: 0px; */
+    display: inline-block;
+    overflow-y: auto;
+    /* max-height: 85%; */
+    width: 350px;
+    z-index: 1;
+    padding-top:20px;
+}
+
+    #tocDiv:hover {
+        opacity: 1;
+    }
+
+    #tocDiv h2 {
+        font-size: 20px;
+    }
+
+.spacer {
+    width: 5px;
+}
+
+.dialog_btn {
+    border: 1px solid lightsteelblue;
+    color: white;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 14px;
+    z-index: 1001;
+    background: #6f7d91;
+    border-radius: 3px;
+}
+
+.dialog_btn:hover {
+    background: lightsteelblue;
+    border: 1px solid #6f7d91;
+}

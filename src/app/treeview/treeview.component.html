@@ -1,0 +1,35 @@
+<div *ngIf="node">
+  <table>
+      <tr>
+          <td style="width: 140px;">
+              <div style="white-space: nowrap;">
+                  <input *ngIf="showCheckbox()" type="checkbox" #cbWdeqAml id="cbWdeqAml_{{title | spaceUnderscore}}_{{node.id}}" [(ngModel)]="node.visible" (click)="changeVisibility($event)" />
+                  <img *ngIf="imageData != null" src="{{imageData}}" />
+                  <a *ngIf="(subLayers && subLayers.length > 0)|| images.length > 0" data-toggle="collapse" aria-expanded="false" href="#collapse_{{title | spaceUnderscore | periodUnderscore}}_{{node.id}}">
+                      <label>{{title | underscoreToSpace}}</label>
+                  </a>
+                  <label *ngIf="(!subLayers || subLayers.length == 0) && images.length == 0">{{title | underscoreToSpace}}</label>
+                  <!-- <img src="./app/images/MagifyingGlass.png" (click)="zoomToExtent()" style="width:20px;" /> -->
+              </div>
+          </td>
+          <td *ngIf="showSlider" style="width:5px;"></td>
+          <td *ngIf="showSlider">
+              <app-custom-slider [layer]="node"></app-custom-slider>
+          </td>
+      </tr>
+  </table>
+  <div *ngIf="subLayers || images.length > 0" id="collapse_{{title | spaceUnderscore | periodUnderscore}}_{{node.id}}" class="{{collapseClass}}">
+      <ul *ngIf="subLayers && subLayers.length > 0">
+          <div *ngFor="let sublayer of subLayers">
+              <app-treeview [showSlider]="false" [layerLookupName]="layerLookupName" [rootLayer]="rootLayer" [node]="sublayer"></app-treeview>
+          </div>
+      </ul>
+
+      <ul *ngIf="images && images.length > 0">
+          <div *ngFor="let layerImage of images">
+              <img src="{{layerImage.ImageData}}" />&nbsp;{{layerImage.Title}}
+          </div>
+      </ul>
+  </div>
+  <hr *ngIf="(subLayers && subLayers.length > 0) || images.length > 0" style="margin: 0; border-top: 1px solid #b4b4b4;" />
+</div>

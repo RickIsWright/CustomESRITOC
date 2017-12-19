@@ -1,0 +1,75 @@
+<app-popup title="Table of Contents">
+  <div id="tocDiv" class="container">
+    <div class="panel-group">
+      <div style="overflow-x: auto; margin-right: 15px; display: inline-block; min-width: 320px;" class="panel panel-default">
+        <div class="panel-heading" style="width: 100%;">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" aria-expanded="true" href="#collapse1">Base Layers</a>
+          </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse in">
+          <div class="panel-body">
+            <table style="width:100%;">
+              <tr *ngIf="mapService.wiseWells">
+                <td colspan="3">
+                  <app-treeview [node]="mapService.wiseWells" [showSlider]="true"></app-treeview>
+                </td>
+              </tr>
+              <!-- <tr *ngIf="mapService.recreation">
+                <td colspan="3">
+                  <app-treeview [node]="mapService.recreation" [showSlider]="true" [title]="'Water Recreation'"></app-treeview>
+                </td>
+              </tr> -->
+              <tr *ngIf="mapService.landfills">
+                <td colspan="3">
+                  <app-treeview [node]="mapService.landfills" [showSlider]="true"></app-treeview>
+                </td>
+              </tr>
+              <tr *ngIf="mapService.wind">
+                <td colspan="3">
+                  <app-treeview [node]="mapService.wind" [showSlider]="true" [title]="'Wind'"></app-treeview>
+                </td>
+              </tr>
+              <tr>
+                <tr *ngIf="mapService.turbines">
+                  <td colspan="3">
+                    <app-treeview [node]="mapService.turbines" [showSlider]="true" [title]="'Turbines'"></app-treeview>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" #cbStreetMap id="cbStreetMap" checked="checked" (click)="updateVisibility($event, 'street')" />
+                    <label for="cbStreetMap">Street Map</label>
+                  </td>
+                  <td class="spacer"></td>
+                  <td>
+                    <app-custom-slider [layer]="mapService.streetMap"></app-custom-slider>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width: 140px;">
+                    <input type="checkbox" #cbTopoMap id="cbTopoMap" (click)="updateVisibility($event, 'topo')" />
+                    <label for="cbTopoMap">Topo Map</label>
+                  </td>
+                  <td class="spacer"></td>
+                  <td>
+                    <app-custom-slider [layer]="mapService.topoMap"></app-custom-slider>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" #cbAerialMap id="cbAerialMap" (click)="updateVisibility($event, 'aerial')" />
+                    <label for="cbAerialMap">Aerial Map</label>
+                  </td>
+                  <td class="spacer"></td>
+                  <td>
+                    <app-custom-slider [layer]="mapService.aerialMap"></app-custom-slider>
+                  </td>
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-popup>
