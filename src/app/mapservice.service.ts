@@ -19,11 +19,10 @@ export class MapserviceService {
   streetMap;
   aerialMap;
   topoMap;
-  wiseWells = null;
-  // recreation;
   landfills;
   wind;
   turbines;
+  nps;
   //#endregion
 
   public mapLoadPromise = new Promise<boolean>((resolve, reject) => { }); // : Promise<boolean>;
@@ -73,12 +72,6 @@ export class MapserviceService {
     this.topoMap = new this.ArcGISTiledMapServiceLayer(this.constants.TopoMapEndpoint,
       { visible: false, id: 'base_topo_layer' });
 
-    this.wiseWells = new this.ArcGISDynamicMapServiceLayer(this.constants.wiseWellsEndpoint,
-      { visible: true, id: 'wdeq_wisewells_layer' });
-
-    // this.recreation = new this.ArcGISTiledMapServiceLayer(this.constants.recreationEndpoint,
-    //   { id: 'wdeq_recreation_layer' });
-
     this.landfills = new this.ArcGISDynamicMapServiceLayer(this.constants.landfillsEndpoint,
       { id: 'wdeq_landfills_layer' });
 
@@ -88,13 +81,15 @@ export class MapserviceService {
     this.turbines = new this.ArcGISDynamicMapServiceLayer(this.constants.turbineLocEndpont,
       { id: 'turbine_location_layer' });
 
+    this.nps = new this.ArcGISDynamicMapServiceLayer(this.constants.npsEndpoint,
+      { id: 'nps_layer' });
+
     this.map.addLayers([
       this.aerialMap,
       this.topoMap,
       this.streetMap,
       this.wind,
-      this.wiseWells,
-      // this.recreation,
+      this.nps,
       this.landfills,
       this.turbines
     ]);

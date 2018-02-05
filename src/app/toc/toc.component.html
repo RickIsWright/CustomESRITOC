@@ -10,16 +10,11 @@
         <div id="collapse1" class="panel-collapse collapse in">
           <div class="panel-body">
             <table style="width:100%;">
-              <tr *ngIf="mapService.wiseWells">
+              <tr *ngIf="mapService.nps">
                 <td colspan="3">
-                  <app-treeview [node]="mapService.wiseWells" [showSlider]="true"></app-treeview>
+                  <app-treeview [node]="mapService.nps" [showSlider]="true" [title]="'NPS'"></app-treeview>
                 </td>
               </tr>
-              <!-- <tr *ngIf="mapService.recreation">
-                <td colspan="3">
-                  <app-treeview [node]="mapService.recreation" [showSlider]="true" [title]="'Water Recreation'"></app-treeview>
-                </td>
-              </tr> -->
               <tr *ngIf="mapService.landfills">
                 <td colspan="3">
                   <app-treeview [node]="mapService.landfills" [showSlider]="true"></app-treeview>

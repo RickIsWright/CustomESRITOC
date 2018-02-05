@@ -53,6 +53,17 @@ export class PopupComponent implements AfterViewInit {
     div.style.top = (e.clientY - this.offY) + 'px';
     div.style.left = (e.clientX - this.offX) + 'px';
     div.style.right = 'auto';
+
+    // disable bubbling at this point
+    if (e.stopPropagation) {
+      e.stopPropagation();
+    }
+    if (e.preventDefault) {
+      e.preventDefault();
+    }
+    e.cancelBubble = true;
+    e.returnValue = false;
+    return false;
   }
 
   public mouseUp = () => {
