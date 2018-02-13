@@ -20,7 +20,7 @@ import { Component, Injectable, Input, trigger, transition, style, animate, Afte
 @Injectable()
 export class PopupComponent implements AfterViewInit {
 
-  @Input() title: string;
+  @Input() windowTitle: string;
   // @Input() closed: () => void;
   // @Input() isVisible: boolean;
   @Input() componentHeight: number;
