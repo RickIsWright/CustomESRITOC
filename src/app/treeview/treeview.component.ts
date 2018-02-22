@@ -1,5 +1,5 @@
 import { Component, Input, AfterViewInit } from '@angular/core';
-import { MapserviceService } from '../mapservice.service';
+import { MapService } from '../mapservice.service';
 import ArcGISDynamicMapServiceLayer = require('esri/layers/ArcGISDynamicMapServiceLayer');
 import LayerInfo = require('esri/layers/LayerInfo');
 
@@ -36,7 +36,7 @@ export class TreeviewComponent implements AfterViewInit {
   private subLayers: Array<any> = [];
   private loaded = false;
 
-  constructor(private _mapService: MapserviceService) {
+  constructor(private _mapService: MapService) {
     this.images = [];
   }
 
@@ -149,6 +149,7 @@ export class TreeviewComponent implements AfterViewInit {
   }
 
   private dynamicLayerLoaded(layer) {
+    // note: this works for ArcGISDynamicMapServiceLayer and ArcGISTiledMapServiceLayer but will err on FeatureLayer for now
     const layerLookup = {};
     layer.layerInfos.forEach((layerInfo) => {
       layerLookup['' + layerInfo.id] = layerInfo;

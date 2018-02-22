@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { loadModules } from 'esri-loader';
-import { MapserviceService } from '../mapservice.service';
+import { MapService } from '../mapservice.service';
 
 @Component({
   selector: 'app-esri-map',
@@ -10,7 +10,7 @@ import { MapserviceService } from '../mapservice.service';
 export class EsriMapComponent implements OnInit {
   @ViewChild('map') mapEl: ElementRef;
   map: any;
-  constructor(private mapService: MapserviceService) { }
+  constructor(private mapService: MapService) { }
 
   ngOnInit() {
     this.mapService.loadMapComponents(this.mapEl.nativeElement);

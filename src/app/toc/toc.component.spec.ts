@@ -9,7 +9,7 @@ import { PopupComponent } from '../popup/popup.component';
 import { SpaceUnderscorePipe } from '../space-underscore.pipe';
 import { PeriodUnderscorePipe } from '../period-underscore.pipe';
 import { UnderscoreToSpacePipe } from '../underscore-to-space.pipe';
-import { MapserviceService } from '../mapservice.service';
+import { MapService } from '../mapservice.service';
 import { Constants } from '../constants';
 
 describe('TocComponent', () => {
@@ -33,7 +33,7 @@ describe('TocComponent', () => {
         UnderscoreToSpacePipe
       ],
       providers: [
-        MapserviceService,
+        MapService,
         Constants
       ]
     })

@@ -6,7 +6,7 @@ import { loadModules } from 'esri-loader';
 import { Constants } from './constants';
 
 @Injectable()
-export class MapserviceService {
+export class MapService {
   //#region Esri components
   Map;
   ArcGISDynamicMapServiceLayer;

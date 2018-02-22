@@ -7,7 +7,7 @@ import { SpaceUnderscorePipe } from '../space-underscore.pipe';
 import { PeriodUnderscorePipe } from '../period-underscore.pipe';
 import { UnderscoreToSpacePipe } from '../underscore-to-space.pipe';
 import { CustomSliderComponent } from '../custom-slider/custom-slider.component';
-import { MapserviceService } from '../mapservice.service';
+import { MapService } from '../mapservice.service';
 import { Constants } from '../constants';
 
 describe('TreeviewComponent', () => {
@@ -29,7 +29,7 @@ describe('TreeviewComponent', () => {
         CustomSliderComponent
       ],
       providers: [
-        MapserviceService,
+        MapService,
         Constants
       ]
     })

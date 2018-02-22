@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, AfterViewInit } from '@angular/core';
-import { MapserviceService } from '../mapservice.service';
+import { MapService } from '../mapservice.service';
 
 @Component({
   selector: 'app-toc',
@@ -7,7 +7,7 @@ import { MapserviceService } from '../mapservice.service';
   styleUrls: ['./toc.component.css']
 })
 export class TocComponent implements AfterViewInit {
-  constructor(private mapService: MapserviceService, private elementRef: ElementRef) {
+  constructor(private mapService: MapService, private elementRef: ElementRef) {
   }
 
   ngAfterViewInit() {
