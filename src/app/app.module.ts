@@ -13,9 +13,9 @@ import { TreeviewComponent } from './treeview/treeview.component';
 import { MapService } from './mapservice.service';
 import { Constants } from './constants';
 import { CustomSliderComponent } from './custom-slider/custom-slider.component';
-import { SpaceUnderscorePipe } from './space-underscore.pipe';
-import { PeriodUnderscorePipe } from './period-underscore.pipe';
-import { UnderscoreToSpacePipe } from './underscore-to-space.pipe';
+import { SpaceUnderscorePipe } from './pipes/space-underscore.pipe';
+import { PeriodUnderscorePipe } from './pipes/period-underscore.pipe';
+import { UnderscoreToSpacePipe } from './pipes/underscore-to-space.pipe';
 
 @NgModule({
   declarations: [

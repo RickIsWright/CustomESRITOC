@@ -2,6 +2,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.1.
 
+### Trihydro
+Trihydro tackles complex engineering and environmental challenges with a core focus on specific markets. Our technical experience, regulatory expertise, and successful project delivery have earned us a reputation as one of the top engineering and environmental firms in the country.  Consumers and collaborators of data require access to their information at any time, from any device, anywhere. At Trihydro, we apply the same ease of accessibility to environmental site data. We provide portable and flexible web-based data management tools that enable powerful decision-making for your site(s).
+
+Learn more at [https://www.trihydro.com/](https://www.trihydro.com/)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files. Or run `ng serve -o` to automatically open the default browser
