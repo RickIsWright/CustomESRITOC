@@ -1,5 +1,5 @@
 import { Component, Input, AfterViewInit } from '@angular/core';
-import { MapService } from '../mapservice.service';
+import { MapService } from '../services/mapservice.service';
 import ArcGISDynamicMapServiceLayer = require('esri/layers/ArcGISDynamicMapServiceLayer');
 import LayerInfo = require('esri/layers/LayerInfo');
 
@@ -18,11 +18,14 @@ export class TreeviewComponent implements AfterViewInit {
 
   @Input() set node(value: any) {
     this._node = value;
+    if (!this.title) {
+      this.setDefaultTitle();
+    }
   }
   get node() {
     return this._node;
   }
-  @Input() private showSlider: boolean;
+  @Input() private showSlider = true;
   @Input() layerLookupName: string;
   @Input() private expanded: boolean;
   @Input() set rootLayer(value: any) {
@@ -50,17 +53,7 @@ export class TreeviewComponent implements AfterViewInit {
     // if we haven't loaded yet, AND we have a node then continue
     if (!(this._node instanceof this._mapService.LayerInfo) && !this.loaded && this.node) {
       this.loaded = true;
-      if (this.node.url) {
-        const start = this.node.url.toLowerCase().indexOf('/rest/services/');
-        const end = this.node.url.toLowerCase().indexOf('/mapserver', start);
-        const lookup = this.node.url.substring(start + 15, end);
-        if (!this.title) {
-          this.title = lookup;
-        }
-        if (!this.layerLookupName) {
-          this.layerLookupName = lookup;
-        }
-      }
+      this.setDefaultTitle();
 
       if (!this.rootLayer) {
         this.rootLayer = this.node;
@@ -75,11 +68,25 @@ export class TreeviewComponent implements AfterViewInit {
       } else {
         this.continueLoad();
       }
-    } else {
+    } else if (this.node) {
       if (this.node.name) {
         this.title = this.node.name;
       }
       this.continueLoad();
+    }
+  }
+
+  private setDefaultTitle() {
+    if ((!this.title || !this.layerLookupName) && this.node && this.node.url) {
+      const start = this.node.url.toLowerCase().indexOf('/rest/services/');
+      const end = this.node.url.toLowerCase().indexOf('/mapserver', start);
+      const lookup = this.node.url.substring(start + 15, end);
+      if (!this.title) {
+        this.title = lookup;
+      }
+      if (!this.layerLookupName) {
+        this.layerLookupName = lookup;
+      }
     }
   }
 
@@ -101,6 +108,7 @@ export class TreeviewComponent implements AfterViewInit {
       }
     }
 
+    // set the class for expanded/collapsed
     if (this.expanded) {
       this.collapseClass = 'panel-collapse collapse in';
     } else {
@@ -111,6 +119,7 @@ export class TreeviewComponent implements AfterViewInit {
     }
 
     const id = parseInt(this.node.id, 10);
+    // get the symbology objects for top layer
     const symbObj = this._mapService.symbologyObjs.filter(obj => {
       if (this.layerLookupName) {
         return obj[0] === this.layerLookupName;
@@ -119,6 +128,8 @@ export class TreeviewComponent implements AfterViewInit {
       }
     });
     if (symbObj && symbObj.length > 0) {
+      // filter symbology objects down to this specific layer
+      // this filters for sublayer id
       const thisLayer = symbObj[0][1].layers.filter(function (lyr) {
         return lyr.layerId === id;
       });
@@ -126,6 +137,7 @@ export class TreeviewComponent implements AfterViewInit {
         let fstLeg;
         let dta;
         if (thisLayer[0].legend.length === 1) {
+          // single image
           fstLeg = thisLayer[0].legend[0];
           dta = 'data:' + fstLeg.contentType;
           dta += ';base64,' + fstLeg.imageData;
@@ -201,16 +213,6 @@ export class TreeviewComponent implements AfterViewInit {
       return true; // if we are at the root level, allow it
     }
   }
-
-  // private zoomToExtent() {
-  //   let url = this.rootLayer.url;
-  //   url = url.substring(0, url.indexOf('MapServer') + 9);
-  //   this._siteService.getExtentForLayer(url, this.dynamicLayer.id, this._mapService.map.spatialReference.wkid).then(extent => {
-  //     if (extent) {
-  //       this._mapService.map.setExtent(extent);
-  //     }
-  //   });
-  // }
 
   changeVisibility(evt) {
     if (this.rootLayer instanceof this._mapService.ArcGISTiledMapServiceLayer) {

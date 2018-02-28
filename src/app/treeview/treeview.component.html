@@ -21,7 +21,7 @@
   <div *ngIf="subLayers || images.length > 0" id="collapse_{{title | spaceUnderscore | periodUnderscore}}_{{node.id}}" class="{{collapseClass}}">
       <ul *ngIf="subLayers && subLayers.length > 0">
           <div *ngFor="let sublayer of subLayers">
-              <app-treeview [showSlider]="false" [layerLookupName]="layerLookupName" [rootLayer]="rootLayer" [node]="sublayer"></app-treeview>
+              <app-treeview [showSlider]="false" [layerLookupName]="layerLookupName" [rootLayer]="rootLayer" [node]="sublayer" [expanded]="expanded"></app-treeview>
           </div>
       </ul>
 

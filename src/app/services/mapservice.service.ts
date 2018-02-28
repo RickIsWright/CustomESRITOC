@@ -3,7 +3,7 @@ import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import ArcGISDynamicMapServiceLayer = require('esri/layers/ArcGISDynamicMapServiceLayer');
 import { loadModules } from 'esri-loader';
-import { Constants } from './constants';
+import { Constants } from '../constants';
 
 @Injectable()
 export class MapService {

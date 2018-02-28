@@ -10,7 +10,7 @@ import { TocComponent } from './toc/toc.component';
 import { PopupComponent } from './popup/popup.component';
 import { TreeviewComponent } from './treeview/treeview.component';
 
-import { MapService } from './mapservice.service';
+import { MapService } from './services/mapservice.service';
 import { Constants } from './constants';
 import { CustomSliderComponent } from './custom-slider/custom-slider.component';
 import { SpaceUnderscorePipe } from './pipes/space-underscore.pipe';

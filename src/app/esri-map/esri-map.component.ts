@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { loadModules } from 'esri-loader';
-import { MapService } from '../mapservice.service';
+import { MapService } from '../services/mapservice.service';
 
 @Component({
   selector: 'app-esri-map',
