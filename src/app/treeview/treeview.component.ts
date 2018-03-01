@@ -233,33 +233,28 @@ export class TreeviewComponent implements AfterViewInit {
     if (this.rootLayer !== this.node || checked) {
       const that = this;
       this.rootLayer.layerInfos.forEach((layerInfo) => {
-        if ((layerInfo as any).parentLayerId > -1) {
-          let add = true;
-          let li = layerInfo as any;
-          if (li.subLayerIds && li.subLayerIds.length > 0) {
-            add = false;
-          }
-          while (li.parentLayerId > -1) {
-            li = that.rootLayer.layerInfos.filter((obj) => {
-              return obj.id === li.parentLayerId;
-            })[0];
-            if (!li.visible) {
-              add = false;
-              break;
+        if ((layerInfo as any).visible) {
+          if ((layerInfo as any).parentLayerId > -1) {
+            // let add = true;
+            let li = layerInfo as any;
+            if (li.subLayerIds && li.subLayerIds.length > 0) {
+              return;
             }
-          }
-          if (add && (layerInfo as any).visible) {
-            if (that.node !== layerInfo) {
-              vis.push(layerInfo.id);
-            } else if (that.node.visible) {
-              vis.push(layerInfo.id);
+            while (li.parentLayerId > -1) {
+              li = that.rootLayer.layerInfos.filter((obj) => {
+                return obj.id === li.parentLayerId;
+              })[0];
+              if (!li.visible) {
+                return;
+              }
             }
-          }
-        } else if ((layerInfo as any).visible) {
-          // check to see if we have a top level (group).  if so, dont add it
-          // adding it would cause all layers below to turn on as well
-          if (!layerInfo.subLayerIds || layerInfo.subLayerIds.length === 0) {
             vis.push(layerInfo.id);
+          } else if ((layerInfo as any).visible) {
+            // check to see if we have a top level (group).  if so, dont add it
+            // adding it would cause all layers below to turn on as well
+            if (!layerInfo.subLayerIds || layerInfo.subLayerIds.length === 0) {
+              vis.push(layerInfo.id);
+            }
           }
         }
       });
