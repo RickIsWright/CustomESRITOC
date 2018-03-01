@@ -226,17 +226,23 @@ export class TreeviewComponent implements AfterViewInit {
 
   getVisibleLayers(checked: boolean): Array<number> {
     const vis = [];
+    if (!this.rootLayer.visible) {
+      vis.push(-1);
+      return vis;
+    }
     if (this.rootLayer !== this.node || checked) {
       const that = this;
       this.rootLayer.layerInfos.forEach((layerInfo) => {
-        if ((layerInfo as any)._parentLayerInfo) {
+        if ((layerInfo as any).parentLayerId > -1) {
           let add = true;
           let li = layerInfo as any;
           if (li.subLayerIds && li.subLayerIds.length > 0) {
             add = false;
           }
-          while (li._parentLayerInfo) {
-            li = li._parentLayerInfo;
+          while (li.parentLayerId > -1) {
+            li = that.rootLayer.layerInfos.filter((obj) => {
+              return obj.id === li.parentLayerId;
+            })[0];
             if (!li.visible) {
               add = false;
               break;
@@ -251,6 +257,7 @@ export class TreeviewComponent implements AfterViewInit {
           }
         } else if ((layerInfo as any).visible) {
           // check to see if we have a top level (group).  if so, dont add it
+          // adding it would cause all layers below to turn on as well
           if (!layerInfo.subLayerIds || layerInfo.subLayerIds.length === 0) {
             vis.push(layerInfo.id);
           }
